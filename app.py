@@ -73,7 +73,8 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return "The application has started"
+    #return render_template('index.html')
 
 @app.route('/search', methods=['POST'])
 def recommend():
