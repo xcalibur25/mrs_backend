@@ -10,11 +10,23 @@ import requests
 
 # TMDb API Key
 TMDB_API_KEY = 'b7f523542649c0e44bd6c12a9d753c90'
+#movies=pd.read_csv('tmdb_5000_movies.csv')
+#credits=pd.read_csv('tmdb_5000_credits.csv')
 
-# Load and preprocess data
-movies = pd.read_csv('tmdb_5000_movies.csv').merge(
-    pd.read_csv('tmdb_5000_credits.csv'), left_on='id', right_on='movie_id', how='left'
+#movies.to_pickle("movies.pkl")
+#credits.to_pickle("credits.pkl")
+
+
+movies = pd.read_pickle("movies.pkl")
+credits = pd.read_pickle("credits.pkl")
+
+movies = movies.merge(
+    credits, left_on='id', right_on='movie_id', how='left'
 )
+# Load and preprocess data
+#movies = pd.read_csv('tmdb_5000_movies.csv').merge(
+    #pd.read_csv('tmdb_5000_credits.csv'), left_on='id', right_on='movie_id', how='left'
+#)
 
 def parse_data(data):
     try:
