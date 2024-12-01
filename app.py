@@ -7,7 +7,7 @@ from flask_cors import CORS
 import ast
 import requests
 
-
+# https://drive.google.com/file/d/1493yOsypvsKxCWT7y0e1TTXZlvMkLID5/view?usp=drive_link
 # TMDb API Key
 TMDB_API_KEY = 'b7f523542649c0e44bd6c12a9d753c90'
 #movies=pd.read_csv('tmdb_5000_movies.csv')
@@ -17,16 +17,22 @@ TMDB_API_KEY = 'b7f523542649c0e44bd6c12a9d753c90'
 #credits.to_pickle("credits.pkl")
 
 
-movies = pd.read_pickle("movies.pkl")
-credits = pd.read_pickle("credits.pkl")
+#movies = pd.read_pickle("movies.pkl")
+#credits = pd.read_pickle("credits.pkl")
 
-movies = movies.merge(
-    credits, left_on='id', right_on='movie_id', how='left'
-)
-# Load and preprocess data
-#movies = pd.read_csv('tmdb_5000_movies.csv').merge(
-    #pd.read_csv('tmdb_5000_credits.csv'), left_on='id', right_on='movie_id', how='left'
+#movies = movies.merge(
+    #credits, left_on='id', right_on='movie_id', how='left'
 #)
+# Load and preprocess data
+#movies = pd.read_csv('https://drive.google.com/file/d/1e9T4xEdvGY9HpqB5tEjsxUY6q5mizzgo/view?usp=drive_link').merge(
+   # pd.read_csv('https://drive.google.com/file/d/1493yOsypvsKxCWT7y0e1TTXZlvMkLID5/view?usp=drive_link.csv'), left_on='id', right_on='movie_id', how='left'
+#)
+movies_url = "https://drive.google.com/uc?id=1e9T4xEdvGY9HpqB5tEjsxUY6q5mizzgo"
+credits_url = "https://drive.google.com/uc?id=1493yOsypvsKxCWT7y0e1TTXZlvMkLID5"
+
+movies = pd.read_csv(movies_url).merge(
+    pd.read_csv(credits_url), left_on='id', right_on='movie_id', how='left'
+)
 
 def parse_data(data):
     try:
