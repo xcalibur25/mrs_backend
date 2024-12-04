@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -89,37 +89,47 @@ def get_closest_match(title):
 app = Flask(__name__)
 CORS(app)
 
+# @app.route('/')
+# def index():
+#     #return "index.html"
+#     return render_template('index.html')
 @app.route('/')
 def index():
-    return "The application has started successfully!"
+    return render_template('index.html')
 
 @app.route('/search', methods=['POST'])
 def recommend():
     try:
         # Get movie name from the request
-        data = request.get_json()
-        movie = data.get('movie_name')
+        #data = request.get_json()
+        #movie = data.get('movie_name')
+        movie = request.form.get('movie')
+        #print("Movie name: ", movie)
         if not movie:
             return jsonify({"error": "Movie name not provided"}), 400
 
         # Find closest match
         closest_title = get_closest_match(movie)
+        #print("Closest title: ", closest_title)
         if not closest_title:
             return jsonify({"error": "No matching movie found"}), 404
 
         # Fetch recommendations and their posters
         recommendations = get_recommendations(closest_title)
+        #print("Movie Recommendations: \n", recommendations)
         recommendations_with_posters = [
             {"title": rec, "poster": get_movie_poster(rec)} for rec in recommendations
         ]
-        print(recommendations_with_posters)
-        return recommendations_with_posters
+
+        #print(recommendations_with_posters)
+        #return recommendations_with_posters
+        return render_template('index.html', movie=closest_title, recommendations=recommendations_with_posters)
         #return jsonify({"movie": closest_title, "recommendations": recommendations_with_posters})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     #app.run(debug=True)
-    if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    #if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5003)
 

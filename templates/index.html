@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <div class="container">
         <h1>Movie Recommendation System</h1>
-        <form action="/recommend" method="post">
+        <form action="/search" method="post">
             <input type="text" name="movie" placeholder="Enter a movie title" required>
             <button type="submit">Recommend</button>
         </form>
