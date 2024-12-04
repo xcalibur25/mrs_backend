@@ -6,10 +6,10 @@
     <title>Movie Recommendation System</title>
    
 </head>
-<body>
+<body style="background-image: url('/static/img/background-image.jpg')">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <div class="container">
-        <h1>Movie Recommendation System</h1>
+        <h1 style="color: antiquewhite; align-items: center;">Movie Recommendation</h1>
         <form action="/search" method="post">
             <input type="text" name="movie" placeholder="Enter a movie title" required>
             <button type="submit">Recommend</button>
