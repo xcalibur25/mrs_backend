@@ -6,16 +6,16 @@
     <title>Movie Recommendation System</title>
    
 </head>
-<body style="background-image: url('/static/img/background-image.jpg')">
+<body style="background-image: url('/static/img/bg-image4.jpg'); background-repeat: no-repeat; background-size: cover;">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <div class="container">
-        <h1 style="color: antiquewhite; align-items: center;">Movie Recommendation</h1>
+        <h1 style="color: black; align-items: center;">Movie Recommendation</h1>
         <form action="/search" method="post">
             <input type="text" name="movie" placeholder="Enter a movie title" required>
             <button type="submit">Recommend</button>
         </form>
         {% if movie %}
-        <h2>Recommendations for "{{ movie }}":</h2>
+        <h2 style="color: black;">Recommendations for "{{ movie }}"</h2>
         <div class="recommendations">
             {% for rec in recommendations %}
             <div class="movie-card">
